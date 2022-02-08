@@ -5,27 +5,20 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
-
-private val DarkColorPalette = darkColors(
-    primary = Purple200,
-    primaryVariant = Purple700,
-    secondary = Teal200
-)
+import androidx.compose.ui.graphics.Color.Companion.White
 
 private val LightColorPalette = lightColors(
-    primary = Purple500,
-    primaryVariant = Purple700,
-    secondary = Teal200
-
-    /* Other default colors to override
-    background = Color.White,
-    surface = Color.White,
-    onPrimary = Color.White,
-    onSecondary = Color.Black,
-    onBackground = Color.Black,
-    onSurface = Color.Black,
-    */
+    surface = Blue,
+    onSurface = White,
+    primary = LightBlue,
+    onPrimary = Navy
 )
+private val appPalette = lightColors(
+    surface = background,
+    onSurface = White,
+    primary = mainBlue,
+    secondary = mainGrey,
+    )
 
 @Composable
 fun Jetpack_CalculatorTheme(
@@ -33,9 +26,9 @@ fun Jetpack_CalculatorTheme(
     content: @Composable () -> Unit
 ) {
     val colors = if (darkTheme) {
-        DarkColorPalette
+        appPalette
     } else {
-        LightColorPalette
+        appPalette
     }
 
     MaterialTheme(
