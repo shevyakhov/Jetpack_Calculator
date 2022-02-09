@@ -15,7 +15,7 @@ private val LightColorPalette = lightColors(
 )
 private val appPalette = lightColors(
     surface = background,
-    onSurface = White,
+    onSurface = mainWhite,
     primary = mainBlue,
     secondary = mainGrey,
     )
