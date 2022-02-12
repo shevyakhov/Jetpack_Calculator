@@ -17,11 +17,11 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.jetpack_calculator.calculator_logic.*
 import com.example.jetpack_calculator.ui.theme.gradOne
 import com.example.jetpack_calculator.ui.theme.gradTwo
 import com.example.jetpack_calculator.ui.theme.mainBlue
 import com.example.jetpack_calculator.ui.theme.mainGrey
-import com.example.jetpack_calculator.view_model.AppViewModel
 
 @Composable
 fun TopBar(appName: String) {
@@ -67,10 +67,10 @@ fun GradientScreen(
                 overflow = TextOverflow.Ellipsis,
                 softWrap = false,
                 /*
-                * ellipsis start needed
+                * ellipsis start is not created yet
                 * */
                 textAlign = TextAlign.Start,
-                letterSpacing = 4.sp
+                letterSpacing = 3.sp
             )
             Text(
                 text = "888888888888",
@@ -80,7 +80,7 @@ fun GradientScreen(
                 modifier = Modifier
                     .padding(horizontal = 15.dp)
                     .alpha(0.05f),
-                letterSpacing = 4.sp
+                letterSpacing = 3.sp
             )
         }
     }
@@ -96,48 +96,19 @@ fun Buttons(avm: AppViewModel) {
             .fillMaxHeight(),
         verticalArrangement = Arrangement.spacedBy(15.dp)
     ) {
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(15.dp)
-        ) {
-            val list = listOf("AC", "+/-", "⌫", "÷")
-            Button(names = list,avm)
-        }
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(15.dp)
-        ) {
-            val list = listOf("7", "8", "9", "x")
-            Button(names = list,avm)
-        }
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(15.dp)
-        ) {
-            val list = listOf("4", "5", "6", "-")
-            Button(names = list,avm)
-        }
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(15.dp)
-        ) {
-            val list = listOf("1", "2", "3", "+")
-            Button(names = list,avm)
-        }
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(15.dp)
-        ) {
-            val list = listOf("0", ",", "=")
-            Button(names = list,avm)
-        }
+
+        ButtonsRow(list = firstRow, avm = avm)
+        ButtonsRow(list = secondRow, avm = avm)
+        ButtonsRow(list = thirdRow, avm = avm)
+        ButtonsRow(list = forthRow, avm = avm)
+        ButtonsRow(list = fifthRow, avm = avm)
 
     }
 
 }
 
 @Composable
-fun Button(names: List<String>,avm: AppViewModel) {
+fun Button(names: List<String>, avm: AppViewModel) {
     for (name in names.indices) {
         val color = checkColor(names, name)
         Button(
@@ -165,6 +136,14 @@ fun Button(names: List<String>,avm: AppViewModel) {
     }
 }
 
+@Composable
+fun ButtonsRow(list: List<String>, avm: AppViewModel) {
+    Row(
+        ButtonModifier, ButtonArrangement
+    ) {
+        Button(names = list, avm)
+    }
+}
 
 fun checkWidth(name: String): Dp {
     return if (name == "0") {
