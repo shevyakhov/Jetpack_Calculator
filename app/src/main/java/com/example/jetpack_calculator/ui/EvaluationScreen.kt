@@ -3,10 +3,7 @@ package com.example.jetpack_calculator.ui
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
-import androidx.compose.material.TopAppBar
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -24,7 +21,7 @@ import com.example.jetpack_calculator.ui.theme.gradOne
 import com.example.jetpack_calculator.ui.theme.gradTwo
 import com.example.jetpack_calculator.ui.theme.mainBlue
 import com.example.jetpack_calculator.ui.theme.mainGrey
-
+import com.example.jetpack_calculator.view_model.AppViewModel
 
 @Composable
 fun TopBar(appName: String) {
@@ -38,8 +35,10 @@ fun TopBar(appName: String) {
 
 @Composable
 fun GradientScreen(
-    text: String
+    avm: AppViewModel
 ) {
+
+
     Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
@@ -60,7 +59,7 @@ fun GradientScreen(
             contentAlignment = Alignment.CenterEnd,
         ) {
             Text(
-                text = text,
+                text = avm.string.value,
                 style = MaterialTheme.typography.body2,
                 fontSize = 50.sp,
                 maxLines = 1,
@@ -85,12 +84,12 @@ fun GradientScreen(
             )
         }
     }
-
 }
 
-@Composable
-fun Buttons() {
 
+@Composable
+fun Buttons(avm: AppViewModel) {
+    /* Could make an ENUM class for buttons but why bother :)*/
     Column(
         modifier = Modifier
             .padding(vertical = 30.dp, horizontal = 15.dp)
@@ -101,36 +100,36 @@ fun Buttons() {
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.spacedBy(15.dp)
         ) {
-            val list = listOf("AC", "+/-", "%", "÷")
-            Button(names = list)
+            val list = listOf("AC", "+/-", "⌫", "÷")
+            Button(names = list,avm)
         }
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.spacedBy(15.dp)
         ) {
             val list = listOf("7", "8", "9", "x")
-            Button(names = list)
+            Button(names = list,avm)
         }
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.spacedBy(15.dp)
         ) {
             val list = listOf("4", "5", "6", "-")
-            Button(names = list)
+            Button(names = list,avm)
         }
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.spacedBy(15.dp)
         ) {
             val list = listOf("1", "2", "3", "+")
-            Button(names = list)
+            Button(names = list,avm)
         }
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.spacedBy(15.dp)
         ) {
             val list = listOf("0", ",", "=")
-            Button(names = list)
+            Button(names = list,avm)
         }
 
     }
@@ -138,15 +137,16 @@ fun Buttons() {
 }
 
 @Composable
-fun Button(names: List<String>) {
+fun Button(names: List<String>,avm: AppViewModel) {
     for (name in names.indices) {
         val color = checkColor(names, name)
-        androidx.compose.material.Button(
-            onClick = { /*TODO*/ },
+        Button(
+            onClick = { avm.update(names[name]) },
             modifier = Modifier
                 .clip(shape = RoundedCornerShape(15.dp))
                 .width(checkWidth(names[name]))
-                .height(80.dp).shadow(
+                .height(80.dp)
+                .shadow(
                     elevation = 2.dp,
                     shape = RoundedCornerShape(25.dp)
 
@@ -164,6 +164,7 @@ fun Button(names: List<String>) {
         }
     }
 }
+
 
 fun checkWidth(name: String): Dp {
     return if (name == "0") {
