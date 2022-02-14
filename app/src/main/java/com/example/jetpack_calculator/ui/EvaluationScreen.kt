@@ -79,20 +79,28 @@ fun GradientScreen(
                 * ellipsis start is not created yet
                 * */
                 textAlign = TextAlign.Start,
-                letterSpacing = 3.sp
+                letterSpacing = 2.sp
             )
             Text(
                 text = stringResource(id = R.string.eightsString),
                 style = MaterialTheme.typography.body2,
                 fontSize = 50.sp,
-                maxLines = 1,
+                maxLines = 1, textAlign = TextAlign.Start,
                 modifier = Modifier
                     .padding(horizontal = 15.dp)
-                    .alpha(0.05f),
-                letterSpacing = 3.sp
+                    .alpha(alpha = checkForEmptyString(avm.string.value)),
+                letterSpacing = 2.sp
             )
         }
     }
+}
+
+fun checkForEmptyString(string: String): Float {
+    return if (string.isNotBlank()) {
+        0.015f
+    }
+    else
+        0.05f
 }
 
 
