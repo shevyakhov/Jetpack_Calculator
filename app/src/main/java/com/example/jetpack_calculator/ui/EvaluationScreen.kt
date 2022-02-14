@@ -22,14 +22,24 @@ import com.example.jetpack_calculator.R
 import com.example.jetpack_calculator.calculator_logic.*
 import com.example.jetpack_calculator.ui.theme.*
 
+val ButtonModifier = Modifier.fillMaxWidth()
+val ButtonArrangement = Arrangement.spacedBy(15.dp)
+
 @Composable
 fun TopBar(appName: String) {
-    TopAppBar(
-        title = {
-            Text(text = appName, style = MaterialTheme.typography.body1)
-        },
-        backgroundColor = MaterialTheme.colors.secondary
-    )
+    Surface(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(70.dp),
+        color = MaterialTheme.colors.secondary
+    ) {
+        Text(
+            text = appName,
+            modifier = Modifier.padding(15.dp),
+            style = MaterialTheme.typography.body1,
+            textAlign = TextAlign.Left
+        )
+    }
 }
 
 @Composable
@@ -88,7 +98,7 @@ fun GradientScreen(
 
 @Composable
 fun Buttons(avm: AppViewModel) {
-    /* Could make an ENUM class for buttons but why bother :)*/
+    val onButtonClick: (UIButtonConstants) -> Unit = { name: UIButtonConstants -> avm.update(name) }
     Column(
         modifier = Modifier
             .padding(vertical = 30.dp, horizontal = 15.dp)
@@ -96,22 +106,42 @@ fun Buttons(avm: AppViewModel) {
         verticalArrangement = Arrangement.spacedBy(15.dp)
     ) {
 
-        ButtonsRow(list = firstRow, ButtonModifier, ButtonArrangement, avm = avm)
-        ButtonsRow(list = secondRow, ButtonModifier, ButtonArrangement, avm = avm)
-        ButtonsRow(list = thirdRow, ButtonModifier, ButtonArrangement, avm = avm)
-        ButtonsRow(list = forthRow, ButtonModifier, ButtonArrangement, avm = avm)
-        ButtonsRow(list = fifthRow, ButtonModifier, ButtonArrangement, avm = avm)
+        Row(
+            ButtonModifier, ButtonArrangement
+        ) {
 
+            Button(names = firstRow, onButtonClick = onButtonClick)
+        }
+        Row(
+            ButtonModifier, ButtonArrangement
+        ) {
+            Button(names = secondRow, onButtonClick = onButtonClick)
+        }
+        Row(
+            ButtonModifier, ButtonArrangement
+        ) {
+            Button(names = thirdRow, onButtonClick = onButtonClick)
+        }
+        Row(
+            ButtonModifier, ButtonArrangement
+        ) {
+            Button(names = forthRow, onButtonClick = onButtonClick)
+        }
+        Row(
+            ButtonModifier, ButtonArrangement
+        ) {
+            Button(names = fifthRow, onButtonClick = onButtonClick)
+        }
     }
 
 }
 
 @Composable
-fun Button(names: List<String>, avm: AppViewModel) {
+fun Button(names: List<UIButtonConstants>, onButtonClick: (UIButtonConstants) -> Unit) {
     for (name in names.indices) {
         val color = checkColor(names, name)
         Button(
-            onClick = { avm.update(names[name]) },
+            onClick = { onButtonClick(names[name]) },
             modifier = Modifier
                 .clip(shape = RoundedCornerShape(15.dp))
                 .width(checkWidth(names[name]))
@@ -126,7 +156,7 @@ fun Button(names: List<String>, avm: AppViewModel) {
             )
         ) {
             Text(
-                text = names[name],
+                text = names[name].UISymbol,
                 color = checkColor(color),
                 style = MaterialTheme.typography.body1,
                 textAlign = TextAlign.Left
@@ -135,22 +165,8 @@ fun Button(names: List<String>, avm: AppViewModel) {
     }
 }
 
-@Composable
-fun ButtonsRow(
-    list: List<String>,
-    modifier: Modifier,
-    arrangement: Arrangement.HorizontalOrVertical,
-    avm: AppViewModel
-) {
-    Row(
-        modifier, arrangement
-    ) {
-        Button(names = list, avm)
-    }
-}
-
-fun checkWidth(name: String): Dp {
-    return if (name == Zero) {
+fun checkWidth(name: UIButtonConstants): Dp {
+    return if (name == UIButtonConstants.Zero) {
         175.dp
     } else
         80.dp
@@ -163,7 +179,7 @@ fun checkColor(color: Color): Color {
         MainBlue
 }
 
-fun checkColor(list: List<String>, index: Int): Color {
+fun checkColor(list: List<UIButtonConstants>, index: Int): Color {
     return if (index == list.size - 1) {
         MainBlue
     } else

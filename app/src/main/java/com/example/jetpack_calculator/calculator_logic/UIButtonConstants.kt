@@ -1,41 +1,66 @@
 package com.example.jetpack_calculator.calculator_logic
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
+
+enum class UIButtonConstants(val UISymbol: String, val parserSymbol: String) {
+    AC("AC", ""),
+    Backspace("⌫", " "),
+    Point(".", "."),
+    Divide("÷", "/"),
+    PlusMinus("+/-", "+/-"),
+    Seven("7", "7"),
+    Eight("8", "8"),
+    Nine("9", "9"),
+    Multiply("x", "*"),
+    Four("4", "4"),
+    Five("5", "5"),
+    Six("6", "6"),
+    Minus("-", "-"),
+    One("1", "1"),
+    Two("2", "2"),
+    Three("3", "3"),
+    Plus("+", "+"),
+    Zero("0", "0"),
+    Solve("=", "="),
+}
 
 
-const val AC = "AC"
-const val Backspace = "⌫"
-const val Point = "."
-const val Divide = "÷"
-const val PlusMinus = "+/-"
+val firstRow by lazy {
+    listOf(
+        UIButtonConstants.AC,
+        UIButtonConstants.PlusMinus,
+        UIButtonConstants.Backspace,
+        UIButtonConstants.Divide
+    )
+}
+val secondRow by lazy {
+    listOf(
+        UIButtonConstants.Seven,
+        UIButtonConstants.Eight,
+        UIButtonConstants.Nine,
+        UIButtonConstants.Multiply
+    )
+}
+val thirdRow by lazy {
+    listOf(
+        UIButtonConstants.Four,
+        UIButtonConstants.Five,
+        UIButtonConstants.Six,
+        UIButtonConstants.Minus
+    )
+}
+val forthRow by lazy {
+    listOf(
+        UIButtonConstants.One,
+        UIButtonConstants.Two,
+        UIButtonConstants.Three,
+        UIButtonConstants.Plus
+    )
+}
+val fifthRow by lazy {
+    listOf(
+        UIButtonConstants.Zero,
+        UIButtonConstants.Point,
+        UIButtonConstants.Solve
+    )
+}
 
-const val Seven = "7"
-const val Eight = "8"
-const val Nine = "9"
-const val Multiply = "x"
-
-
-const val Four = "4"
-const val Five = "5"
-const val Six = "6"
-const val Minus = "-"
-
-
-const val One = "1"
-const val Two = "2"
-const val Three = "3"
-const val Plus = "+"
-
-const val Zero = "0"
-const val Solve = "="
-
-val firstRow by lazy { listOf(AC, PlusMinus, Backspace, Divide) }
-val secondRow by lazy { listOf(Seven, Eight, Nine, Multiply) }
-val thirdRow by lazy { listOf(Four, Five, Six, Minus) }
-val forthRow by lazy { listOf(One, Two, Three, Plus) }
-val fifthRow by lazy { listOf(Zero, Point, Solve) }
-val ButtonModifier = Modifier.fillMaxWidth()
-val  ButtonArrangement= Arrangement.spacedBy(15.dp)
