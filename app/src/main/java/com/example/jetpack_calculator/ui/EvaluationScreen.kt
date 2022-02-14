@@ -18,10 +18,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.jetpack_calculator.calculator_logic.*
-import com.example.jetpack_calculator.ui.theme.gradOne
-import com.example.jetpack_calculator.ui.theme.gradTwo
-import com.example.jetpack_calculator.ui.theme.mainBlue
-import com.example.jetpack_calculator.ui.theme.mainGrey
+import com.example.jetpack_calculator.ui.theme.*
 
 @Composable
 fun TopBar(appName: String) {
@@ -49,8 +46,8 @@ fun GradientScreen(
                 .background(
                     brush = Brush.verticalGradient(
                         colors = listOf(
-                            gradOne,
-                            gradTwo
+                            GradOne,
+                            GradTwo
                         )
                     ), shape = RoundedCornerShape(10.dp)
                 )
@@ -153,15 +150,15 @@ fun checkWidth(name: String): Dp {
 }
 
 fun checkColor(color: Color): Color {
-    return if (color == mainBlue) {
-        mainGrey
+    return if (color == MainBlue) {
+        MainGrey
     } else
-        mainBlue
+        MainBlue
 }
 
 fun checkColor(list: List<String>, index: Int): Color {
     return if (index == list.size - 1) {
-        mainBlue
+        MainBlue
     } else
-        mainGrey
+        MainGrey
 }

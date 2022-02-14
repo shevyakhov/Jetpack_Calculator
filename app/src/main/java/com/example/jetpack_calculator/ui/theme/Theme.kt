@@ -2,7 +2,6 @@ package com.example.jetpack_calculator.ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color.Companion.White
@@ -14,10 +13,10 @@ private val LightColorPalette = lightColors(
     onPrimary = Navy
 )
 private val appPalette = lightColors(
-    surface = background,
-    onSurface = mainWhite,
-    primary = mainBlue,
-    secondary = mainGrey,
+    surface = Background,
+    onSurface = MainWhite,
+    primary = MainBlue,
+    secondary = MainGrey,
     )
 
 @Composable

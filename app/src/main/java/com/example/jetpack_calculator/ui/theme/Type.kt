@@ -9,10 +9,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import com.example.jetpack_calculator.R
 
-val yanus = FontFamily(
+private val yanus = FontFamily(
     Font(R.font.yanus)
 )
-val digit = FontFamily(
+private val digit = FontFamily(
     Font(R.font.digit)
 )
 
