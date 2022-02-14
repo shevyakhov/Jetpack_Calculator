@@ -94,11 +94,11 @@ fun Buttons(avm: AppViewModel) {
         verticalArrangement = Arrangement.spacedBy(15.dp)
     ) {
 
-        ButtonsRow(list = firstRow, avm = avm)
-        ButtonsRow(list = secondRow, avm = avm)
-        ButtonsRow(list = thirdRow, avm = avm)
-        ButtonsRow(list = forthRow, avm = avm)
-        ButtonsRow(list = fifthRow, avm = avm)
+        ButtonsRow(list = firstRow, ButtonModifier, ButtonArrangement, avm = avm)
+        ButtonsRow(list = secondRow, ButtonModifier, ButtonArrangement, avm = avm)
+        ButtonsRow(list = thirdRow, ButtonModifier, ButtonArrangement, avm = avm)
+        ButtonsRow(list = forthRow, ButtonModifier, ButtonArrangement, avm = avm)
+        ButtonsRow(list = fifthRow, ButtonModifier, ButtonArrangement, avm = avm)
 
     }
 
@@ -134,16 +134,21 @@ fun Button(names: List<String>, avm: AppViewModel) {
 }
 
 @Composable
-fun ButtonsRow(list: List<String>, avm: AppViewModel) {
+fun ButtonsRow(
+    list: List<String>,
+    modifier: Modifier,
+    arrangement: Arrangement.HorizontalOrVertical,
+    avm: AppViewModel
+) {
     Row(
-        ButtonModifier, ButtonArrangement
+        modifier, arrangement
     ) {
         Button(names = list, avm)
     }
 }
 
 fun checkWidth(name: String): Dp {
-    return if (name == "0") {
+    return if (name == Zero) {
         175.dp
     } else
         80.dp
