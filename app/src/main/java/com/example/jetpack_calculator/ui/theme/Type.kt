@@ -28,7 +28,14 @@ val Typography = Typography(
         fontWeight = FontWeight.W500,
         fontSize = 29.sp,
         color = Color.Black
+    ),
+    h3 = TextStyle(
+        fontFamily = yanus,
+        fontWeight = FontWeight.W300,
+        fontSize = 29.sp,
+        color = Color.Black
     )
+
 )
 
 /* Other default text styles to override

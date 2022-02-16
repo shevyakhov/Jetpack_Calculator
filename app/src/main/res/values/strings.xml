@@ -1,15 +1,18 @@
 <resources>
-    <string name="app_name">Jetpack_Calculator</string>
+    <string name="app_name">Calculator</string>
     <string name="eightsString">8888888888888</string>
     <string name="AC">"AC"</string>
     <string name="Backspace">"⌫"</string>
     <string name="Point">"."</string>
     <string name="Divide">"÷"</string>
+    <string name="DivideTrue">"/"</string>
     <string name="PlusMinus">"+/-"</string>
+    <string name="PlusMinusTrue">" "</string>
     <string name="Seven">"7"</string>
     <string name="Eight">"8"</string>
     <string name="Nine">"9"</string>
     <string name="Multiply">"x"</string>
+    <string name="MultiplyTrue">"*"</string>
     <string name="Four">"4"</string>
     <string name="Five">"5"</string>
     <string name="Six">"6"</string>
@@ -20,5 +23,6 @@
     <string name="Plus">"+"</string>
     <string name="Zero">"0"</string>
     <string name="Solve">"="</string>
+    <string name="ACTrue">"AC"</string>
 
 </resources>

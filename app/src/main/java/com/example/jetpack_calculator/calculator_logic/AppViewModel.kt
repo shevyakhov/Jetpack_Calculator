@@ -1,12 +1,13 @@
 package com.example.jetpack_calculator.calculator_logic
 
 import android.util.Log
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import org.mariuszgromada.math.mxparser.Expression
 
 class AppViewModel : ViewModel() {
-    var string = mutableStateOf("")
+    private var string = mutableStateOf("")
 
     fun update(input: UIButtonConstants) {
 
@@ -67,7 +68,10 @@ class AppViewModel : ViewModel() {
 
     private fun checkForMinus() {
         if (string.value.isNotBlank()) {
-            if (string.value.startsWith(UIButtonConstants.Minus.parserSymbol)) {
+            if (string.value.startsWith(
+                    UIButtonConstants.Minus.parserSymbol
+                )
+            ) {
                 string.value = string.value.drop(1)
 
             } else {
@@ -83,4 +87,8 @@ class AppViewModel : ViewModel() {
         string.value = string.value.dropLast(1)
     }
 
+    fun getString(): MutableState<String> {
+        return string
+
+    }
 }
