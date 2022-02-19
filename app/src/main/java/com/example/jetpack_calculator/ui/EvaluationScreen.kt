@@ -115,7 +115,7 @@ fun Buttons(lists: List<List<UIButtonConstants>>, onButtonClick: (UIButtonConsta
             ) {
                 for (name in list.indices) {
                     val color = checkColor(list, name)
-                    Button(name =list[name], color = color, onButtonClick = onButtonClick)
+                    Button(name = list[name], color = color, onButtonClick = onButtonClick)
                 }
             }
         }
@@ -141,7 +141,7 @@ fun Button(name: UIButtonConstants, color: Color, onButtonClick: (UIButtonConsta
         )
     ) {
         Text(
-            text = name.UISymbol,
+            text = stringResource(id = name.UISymbol),
             color = checkColor(color),
             style = MaterialTheme.typography.body1,
             textAlign = TextAlign.Left

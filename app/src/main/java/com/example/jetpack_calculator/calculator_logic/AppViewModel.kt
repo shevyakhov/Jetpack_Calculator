@@ -1,14 +1,15 @@
 package com.example.jetpack_calculator.calculator_logic
 
+import android.app.Application
 import android.util.Log
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.AndroidViewModel
 import org.mariuszgromada.math.mxparser.Expression
 
-class AppViewModel : ViewModel() {
+class AppViewModel(application: Application) : AndroidViewModel(application) {
     private var string = mutableStateOf("")
-
+    private val app = application
     fun update(input: UIButtonConstants) {
 
         when (input) {
@@ -28,7 +29,9 @@ class AppViewModel : ViewModel() {
             UIButtonConstants.Divide,
             UIButtonConstants.Point,
             UIButtonConstants.Minus -> {
-                passString(input.parserSymbol)
+                passString(
+                    app.getString(input.parserSymbol)
+                )
             }
             UIButtonConstants.Solve -> calculate()
             UIButtonConstants.PlusMinus -> checkForMinus()
@@ -69,17 +72,17 @@ class AppViewModel : ViewModel() {
     private fun checkForMinus() {
         if (string.value.isNotBlank()) {
             if (string.value.startsWith(
-                    UIButtonConstants.Minus.parserSymbol
+                    app.getString(UIButtonConstants.Minus.parserSymbol)
                 )
             ) {
                 string.value = string.value.drop(1)
 
             } else {
-                string.value = UIButtonConstants.Minus.parserSymbol + string.value
+                string.value = app.getString(UIButtonConstants.Minus.parserSymbol) + string.value
             }
         } else {
 
-            string.value = UIButtonConstants.Minus.parserSymbol
+            string.value = app.getString(UIButtonConstants.Minus.parserSymbol)
         }
     }
 
@@ -87,7 +90,7 @@ class AppViewModel : ViewModel() {
         string.value = string.value.dropLast(1)
     }
 
-    fun getString(): MutableState<String> {
+    fun getValueString(): MutableState<String> {
         return string
 
     }

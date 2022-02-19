@@ -43,7 +43,7 @@ class MainActivity : ComponentActivity() {
         val listOfButtons = listOf(firstRow, secondRow, thirdRow, forthRow, fifthRow)
         val onButtonClick: (UIButtonConstants) -> Unit =
             { name: UIButtonConstants -> vm.update(name) }
-        val string = vm.getString()
+        val string = vm.getValueString()
         Jetpack_CalculatorTheme {
             Surface(
                 modifier = Modifier.fillMaxSize(),
